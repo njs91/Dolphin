@@ -1,0 +1,14 @@
+{% load static %}
+
+<!doctype html>
+
+<html>
+<head>
+  <title>Dolphin</title>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+</head>
+<body>
+    {% include 'accounts/navbar.html' %}
+    {% block content %}{% endblock %}
+</body>
+</html>
