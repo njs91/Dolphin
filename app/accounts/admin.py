@@ -2,22 +2,17 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from accounts import models
 
-# does nothing
-
 
 class SubscriberInline(admin.TabularInline):
     model = models.Subscriber
-    extra = 1
+    extra = 0
 
 
-admin.site.register(models.Account, UserAdmin)
-
-# does noting
-
-
-class AccountAdmin(admin.ModelAdmin):
+class AccountAdmin(UserAdmin):
     inlines = [SubscriberInline, ]
-    #inlines = (SubscriberInline, )
+
+
+admin.site.register(models.Account, AccountAdmin)
 
 
 @admin.register(models.Subscriber)

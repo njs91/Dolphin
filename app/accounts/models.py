@@ -4,10 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Account(AbstractUser):
     pass
-    # subscriber = ____ < one:many
-    # subscribers = models.ForeignKey(
-    # Subscriber, null = True, on_delete = models.SET_NULL)
-    # need to add fields: subs, em_messages, automations, landing_pages
+    # need to add fields: em_messages, automations, landing_pages
     # may need to define some fields as classes in separate apps, then add as foreign key
     # need to make password field required
     # should also use email field instead of username to log in, and require email instead of username when creating accounts
