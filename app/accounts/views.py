@@ -8,9 +8,3 @@ def account(request):
 
 def edit_account(request):
     return render(request, 'accounts/edit_account.html')
-
-
-def subscribers(request):
-    subscribers = Subscriber.objects.all()
-
-    return render(request, 'accounts/subscribers.html', {'subscribers': subscribers})

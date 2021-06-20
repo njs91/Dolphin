@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from accounts import models
+from accounts.models import Account
+from subscribers.models import Subscriber
 
 
 class SubscriberInline(admin.TabularInline):
-    model = models.Subscriber
+    model = Subscriber
     extra = 0
 
 
@@ -12,10 +13,4 @@ class AccountAdmin(UserAdmin):
     inlines = [SubscriberInline, ]
 
 
-admin.site.register(models.Account, AccountAdmin)
-
-
-@admin.register(models.Subscriber)
-class SubscriberAdmin(admin.ModelAdmin):
-    list_display = ("first_name", "email",
-                    "date_joined", "verified", "account")
+admin.site.register(Account, AccountAdmin)
