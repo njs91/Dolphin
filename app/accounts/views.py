@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse  # delete?
-
-# Create your views here.
+from .models import *
 
 
 def account(request):
     return render(request, 'accounts/account.html')
 
 
-def edit(request):
-    return render(request, 'accounts/edit.html')
+def edit_account(request):
+    return render(request, 'accounts/edit_account.html')
+
+
+def subscribers(request):
+    subscribers = Subscriber.objects.all()
+
+    return render(request, 'accounts/subscribers.html', {'subscribers': subscribers})
