@@ -1,5 +1,12 @@
 {% extends 'accounts/main.html' %}
+
 {% block content %}
+
 <h1>Account Page for {{account}}</h1>
 <p>Email Address: {{account.email}}</p>
+<p>Subs:</p>
+{% for sub in subscribers %}
+	<p>{{sub}}</p>
+{% endfor %}
+
 {% endblock %}

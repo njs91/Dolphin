@@ -4,10 +4,11 @@ from subscribers.models import Subscriber
 from .models import *
 
 
-def account(request, id):
-    account = Account.objects.get(id=id)
-    # subscribers = account.subscribers_set.all()
-    context = {'account': account}
+def get_account(request, pk):
+    account = Account.objects.get(id=pk)
+    subscribers = account.subscriber_set.all()
+    # could also use subscribers = Subscriber.objects.filter(account=account) # better?
+    context = {'account': account, 'subscribers': subscribers}
     return render(request, 'accounts/account.html', context)
 
 
