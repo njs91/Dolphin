@@ -14,10 +14,17 @@
     <tr>
         <td>{{sub.first_name}}</td>
         <td>{{sub.email}}</td>
-        <td>{% for tag in sub.tags.get_queryset %}{{tag.name}}, {% endfor %}</td>
+        <td>
+          {% for tag in sub.tags.get_queryset %}
+          {{tag.name}}{%if not forloop.last%},{%endif%}
+          {% endfor %}
+          {% if not sub.tags.get_queryset %}
+          None
+          {% endif %}
+        </td>
         <td>{{sub.date_joined}}</td>
         <td>
-            <a href="#">View</a>
+            <a href="/account/{{account.id}}/subscribers/{{sub.id}}">View</a>
         </td>
     </tr>
     {% endfor %}
