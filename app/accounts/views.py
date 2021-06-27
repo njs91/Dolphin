@@ -5,9 +5,9 @@ from accounts.models import Account
 
 def get_account(request, pk):
     account = Account.objects.get(id=pk)
-    subscribers = account.subscriber_set.all()
+    # subscribers = account.subscriber_set.all()
     # could also use subscribers = Subscriber.objects.filter(account=account) # better?
-    context = {'account': account, 'subscribers': subscribers}
+    context = {'account': account}
     return render(request, 'accounts/account.html', context)
 
 

@@ -4,9 +4,7 @@
 
 <h1>Account Page for {{account}}</h1>
 <p>Email Address: {{account.email}}</p>
-<p>Subs:</p>
-{% for sub in subscribers %}
-	<p>{{sub}}</p>
-{% endfor %}
-
+<p>@todo: add other info etc</p>
+<a href='/account/{{account.id}}/edit'>Edit Account</a>
+<a href='/account/{{account.id}}/subscribers'>View Subscribers</a>
 {% endblock %}

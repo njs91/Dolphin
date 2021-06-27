@@ -2,5 +2,6 @@
 {% block content %}
 <h1>Edit Account Page for {{account}}</h1>
 <p>Email: {{account.email}}</p>
-<p>@todo: add the rest etc</p>
+<p>@todo: add the rest and make editable etc</p>
+<a href='/account/{{account.id}}/'>Back to Account</a>
 {% endblock %}
