@@ -1,0 +1,15 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<h1>Subscribers Page</h1>
+<h2>Subscriber {{subscriber}}</h2>
+<p>Forename: {{subscriber.first_name}}</p>
+<p>Email: {{subscriber.email}}</p>
+<p>Tags: {% for tag in subscriber.tags.get_queryset %}
+    {{tag.name}}{%if not forloop.last%},{%endif%}
+    {% endfor %}
+    {% if not subscriber.tags.get_queryset %}
+    None
+    {% endif %}</p>
+<p>Date Joined: {{subscriber.date_joined}}</p>
+<a href='/account/{{account.id}}/subscribers'>Back to Subscribers</a>
+{% endblock %}
