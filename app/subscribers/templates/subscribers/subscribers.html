@@ -1,7 +1,7 @@
 {% extends 'accounts/main.html' %}
 {% block content %}
 <h1>Subscribers Page</h1>
-<h2>Subscribers for _____ @todo</h2>
+<h2>Subscribers for {{account}}</h2>
 <table style="width:100%">
     <tr>
       <th>Forename</th>
@@ -14,7 +14,7 @@
     <tr>
         <td>{{sub.first_name}}</td>
         <td>{{sub.email}}</td>
-        <td>@todo</td>
+        <td>{% for tag in sub.tags.get_queryset %}{{tag.name}}, {% endfor %}</td>
         <td>{{sub.date_joined}}</td>
         <td>
             <a href="#">View</a>

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from accounts.models import Account
-from subscribers.models import Subscriber
-from .models import *
+# from .models import *
 
 
 def get_account(request, pk):
@@ -12,5 +11,7 @@ def get_account(request, pk):
     return render(request, 'accounts/account.html', context)
 
 
-def edit_account(request):
-    return render(request, 'accounts/edit_account.html')
+def edit_account(request, pk):
+    account = Account.objects.get(id=pk)
+    context = {'account': account}
+    return render(request, 'accounts/edit_account.html', context)
