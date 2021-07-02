@@ -5,5 +5,5 @@ urlpatterns = [
     path('account/<str:pk>/', views.get_account, name="get_account"),
     path('account/<str:pk>/edit/', views.edit_account,
          name="edit_account"),
-    path('account/<str:pk>/delete', views.delete_account)
+    path('account/<str:pk>/delete/', views.delete_account, name="delete_account")
 ]

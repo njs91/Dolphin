@@ -22,25 +22,16 @@ def edit_account(request, pk):
         form = AccountForm(request.POST, instance=account)
         if form.is_valid():
             form.save()  # saves data to DB
-            # return redirect('/')  # redirects back to '/'
 
     context = {'account': account, 'form': form}
     return render(request, 'accounts/edit_account.html', context)
 
 
 def delete_account(request, pk):
-    pass
+    account = Account.objects.get(id=pk)
+    if request.method == 'POST':
+        account.delete()
+        return redirect('/')
 
-# example below
-# def updateOrder(request, pk):
-# 	order = Order.objects.get(id=pk) # gets relevant order
-# 	form = OrderForm(instance=order) # store in variable
-
-# 	if request.method == ‘POST’:
-# 		form = OrderForm(request.POST, instance=order) # pass instance - without instance=order, it would create a new order
-# 		if form.is_valid():
-# 			form.save() #saves data to DB
-# 			return redirect(‘/‘) #redirects back to ‘/‘
-
-# 	context = {‘form’:form}
-# 	return render(request, ‘accounts/order_form.html’, context)
+    context = {'account': account}
+    return render(request, 'accounts/delete.html', context)

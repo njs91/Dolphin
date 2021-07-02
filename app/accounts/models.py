@@ -3,6 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Account(AbstractUser):
+
+    def __str__(self) -> str:
+        return self.first_name
+
     pass
     # need to add fields: em_messages, automations, landing_pages
     # may need to define some fields as classes in separate apps, then add as foreign key
