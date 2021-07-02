@@ -28,7 +28,7 @@ def edit_subscriber(request, pk, sub_id):
         form = SubscriberForm(request.POST, instance=subscriber)
         if form.is_valid():
             form.save()
-            redirect_url = '/account/' + pk + '/subscribers/' + sub_id
+            redirect_url = '/accounts/' + pk + '/subscribers/' + sub_id
             return redirect(redirect_url)
 
     context = {'subscriber': subscriber, 'form': form, 'account': account}
@@ -45,3 +45,18 @@ def delete_subscriber(request, pk, sub_id):
     # @todo: do we need account variable and as part of context?
     context = {'account': account, 'subscriber': subscriber}
     return render(request, 'subscribers/delete.html', context)
+
+
+def create_subscriber(request, pk):
+    account = Account.objects.get(id=pk)
+    form = SubscriberForm()
+
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            redirect_url = '/accounts/' + pk + '/subscribers/'
+            return redirect(redirect_url)
+
+    context = {'form': form, 'account': account}
+    return render(request, 'subscribers/create.html', context)

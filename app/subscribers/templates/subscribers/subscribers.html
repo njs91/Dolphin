@@ -24,10 +24,11 @@
         </td>
         <td>{{sub.date_joined}}</td>
         <td>
-            <a href="/account/{{account.id}}/subscribers/{{sub.id}}">View</a>
+            <a href="/accounts/{{account.id}}/subscribers/{{sub.id}}">View</a>
         </td>
     </tr>
     {% endfor %}
   </table>
-  <a href='/account/{{account.id}}'>View Account</a>
+  <a href='/accounts/{{account.id}}'>View Account</a>
+  <a href='/accounts/{{account.id}}/subscribers/create'>Create Subscriber</a>
 {% endblock %}

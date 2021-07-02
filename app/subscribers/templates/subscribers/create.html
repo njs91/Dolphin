@@ -1,0 +1,13 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<p>Create Subscriber Form:</p>
+<form action="{% url 'create_subscriber' account.id %}" method="POST">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" name="submit">
+</form>
+<a href='/accounts/{{account.id}}/subscribers'>Back to Subscribers</a>
+
+{% endblock %}
