@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.http import response
+from django.shortcuts import render, redirect
 from accounts.models import Account
 from subscribers.models import Subscriber
+from .forms import SubscriberForm
 
 
 def get_subscribers(request, pk):
@@ -15,3 +17,31 @@ def get_subscriber(request, pk, sub_id):
     subscriber = Subscriber.objects.get(id=sub_id)
     context = {'account': account, 'subscriber': subscriber}
     return render(request, 'subscribers/subscriber.html', context)
+
+
+def edit_subscriber(request, pk, sub_id):
+    account = Account.objects.get(id=pk)
+    subscriber = Subscriber.objects.get(id=sub_id)
+    form = SubscriberForm(instance=subscriber)
+
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST, instance=subscriber)
+        if form.is_valid():
+            form.save()
+            redirect_url = '/account/' + pk + '/subscribers/' + sub_id
+            return redirect(redirect_url)
+
+    context = {'subscriber': subscriber, 'form': form, 'account': account}
+    return render(request, 'subscribers/edit.html', context)
+
+
+def delete_subscriber(request, pk, sub_id):
+    account = Account.objects.get(id=pk)
+    subscriber = Subscriber.objects.get(id=sub_id)
+    if request.method == 'POST':
+        subscriber.delete()
+        redirect_url = '/account/' + pk + '/subscribers/'
+        return redirect(redirect_url)
+    # @todo: do we need account variable and as part of context?
+    context = {'account': account, 'subscriber': subscriber}
+    return render(request, 'subscribers/delete.html', context)

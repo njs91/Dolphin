@@ -1,0 +1,15 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<h1>Edit Subscriber Page for {{subscriber}}</h1>
+<p>Edit Subscriber Form:</p>
+<form action="{% url 'edit_subscriber' account.id subscriber.id %}" method="POST">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" name="submit">
+</form>
+<a href='/account/{{account.id}}/subscribers/{{subscriber.id}}/delete'>Delete Subscriber</a>
+<a href='/account/{{account.id}}/subscribers/{{subscriber.id}}'>Back to Subscriber</a>
+
+{% endblock %}
