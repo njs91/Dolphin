@@ -1,5 +1,7 @@
 {% extends 'accounts/main.html' %}
+
 {% block content %}
+
 <h1>Edit Account Page for {{account}}</h1>
 {% if account.email %}
 <p>Email: {{account.email}}</p>
@@ -15,14 +17,12 @@
 {% endif %}
 
 <p>Edit Account Form:</p>
-<form action="" method="POST">
+<form action="{% url 'edit_account' account.id %}" method="POST">
 	{% csrf_token %}
 	{{form}}
 	<input type="submit" name="submit">
 </form>
-
 <a href='/account/{{account.id}}/delete'>Delete Account</a>
-
-<p>@todo: add the rest and make editable etc</p>
 <a href='/account/{{account.id}}/'>Back to Account</a>
+
 {% endblock %}
