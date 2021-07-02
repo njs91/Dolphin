@@ -1,0 +1,27 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+
+<h1>Accounts Page</h1>
+<h2>List of all accounts</h2>
+<table style="width:100%">
+    <tr>
+      <th>Forename</th>
+      <th>Surname</th>
+      <th>Email</th>
+      <th>Creation Date</th>
+      <th></th>
+    </tr>
+    {% for account in accounts %}
+    <tr>
+        <td>{{account.first_name}}</td>
+        <td>{{account.last_name}}</td>
+        <td>{{account.email}}</td>
+        <td>{{account.date_joined}}</td>
+        <td>
+            <a href="/account/{{account.id}}/">View</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

@@ -4,6 +4,12 @@ from .forms import AccountForm
 # from .models import *
 
 
+def get_accounts(request):
+    accounts = Account.objects.all()
+    context = {'accounts': accounts}
+    return render(request, 'accounts/account_list.html', context)
+
+
 def get_account(request, pk):
     account = Account.objects.get(id=pk)
     # subscribers = account.subscriber_set.all()
