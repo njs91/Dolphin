@@ -41,3 +41,16 @@ def delete_account(request, pk):
 
     context = {'account': account}
     return render(request, 'accounts/delete.html', context)
+
+
+def create_account(request):
+    form = AccountForm()
+
+    if request.method == 'POST':
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'accounts/create_account.html', context)

@@ -1,0 +1,13 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<p>Create Account Form:</p>
+<form action="{% url 'create_account' %}" method="POST">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" name="submit">
+</form>
+<a href='/accounts/'>Back to Accounts</a>
+
+{% endblock %}
