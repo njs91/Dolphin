@@ -3,12 +3,15 @@ from django.shortcuts import render, redirect
 from accounts.models import Account
 from subscribers.models import Subscriber
 from .forms import SubscriberForm
+from .filters import SubscriberFilter
 
 
 def get_subscribers(request, pk):
     account = Account.objects.get(id=pk)
     subscribers = account.subscriber_set.all()
-    context = {'account': account, 'subscribers': subscribers}
+    filter = SubscriberFilter()
+    context = {'account': account,
+               'subscribers': subscribers, 'filter': filter}
     return render(request, 'subscribers/subscribers.html', context)
 
 
