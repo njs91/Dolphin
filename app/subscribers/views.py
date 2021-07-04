@@ -9,7 +9,8 @@ from .filters import SubscriberFilter
 def get_subscribers(request, pk):
     account = Account.objects.get(id=pk)
     subscribers = account.subscriber_set.all()
-    filter = SubscriberFilter()
+    filter = SubscriberFilter(request.GET, queryset=subscribers)
+    subscribers = filter.qs
     context = {'account': account,
                'subscribers': subscribers, 'filter': filter}
     return render(request, 'subscribers/subscribers.html', context)

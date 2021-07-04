@@ -2,7 +2,10 @@
 {% block content %}
 <h1>Subscribers Page</h1>
 <h2>Subscribers for {{account}}</h2>
-{{filter.form}}
+<form method="get">
+  {{filter.form}}
+  <button type="submit">Search</button>
+</form>
 <table style="width:100%">
     <tr>
       <th>Forename</th>
