@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from accounts.models import Account
 from .forms import AccountForm
 # from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 
 def get_accounts(request):
@@ -45,12 +46,15 @@ def delete_account(request, pk):
 
 def create_account(request):
     form = AccountForm()
+    # form = UserCreationForm()
 
     if request.method == 'POST':
         form = AccountForm(request.POST)
+        # form = UserCreationForm(request.POST)
+        # should hash the password, check username/email doesnt already exist, etc
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('/login')
 
     context = {'form': form}
     return render(request, 'accounts/create_account.html', context)

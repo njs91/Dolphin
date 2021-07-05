@@ -5,7 +5,7 @@
 <p>Create Account Form:</p>
 <form action="{% url 'create_account' %}" method="POST">
 	{% csrf_token %}
-	{{form}}
+	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
 <a href='/accounts/'>Back to Accounts</a>
