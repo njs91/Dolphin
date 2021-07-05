@@ -58,3 +58,8 @@ def create_account(request):
 
     context = {'form': form}
     return render(request, 'accounts/create_account.html', context)
+
+
+def login_page(request):
+    context = {}
+    return render(request, 'accounts/login.html', context)

@@ -1,0 +1,14 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<p>Login Form:</p>
+<form action="{% url 'login' %}" method="POST">
+	{% csrf_token %}
+    <input type="text" name="username" placeholder="Username...">
+	<input type="password" name="password" placeholder="Password...">
+	<input type="submit" name="submit">
+</form>
+<a href='/accounts/create'>Create Account</a>
+
+{% endblock %}
