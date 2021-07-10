@@ -104,6 +104,7 @@ def login_page(request):
         return render(request, 'accounts/login.html', context)
 
 
+# @todo: add login required or check if user is authenticated?
 def logout(request):
     logout(request)
     return redirect('login')
