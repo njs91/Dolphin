@@ -56,8 +56,7 @@ def delete_account(request, pk):
 
 def create_account(request):
     if request.user.is_authenticated:
-        # @todo fix by putting in account context
-        return redirect('get_account')
+        return redirect('get_account', str(request.user.id))
     else:
         form = AccountForm()
         # form = UserCreationForm()
@@ -80,9 +79,9 @@ def create_account(request):
 
 def login_page(request):
     print('--- test login ---')
+    print('HERE', request.user.id)
     if request.user.is_authenticated:
-        # @todo fix by putting in account context
-        return redirect('get_account')
+        return redirect('get_account', str(request.user.id))
     else:
         if request.method == 'POST':
             print('METHOD IS POST')
