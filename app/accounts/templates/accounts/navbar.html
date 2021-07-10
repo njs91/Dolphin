@@ -9,6 +9,10 @@
         <a href="/login">Login</a>
     </li>
     <li>
+        <a href="{% url 'logout' %}">Logout</a>
+    </li>
+    <li>
         <a href="/accounts">Accounts</a>
     </li>
 </ul>
+<span>hi {{request.user}}</span>
