@@ -3,6 +3,7 @@ from accounts.models import Account
 from .forms import AccountForm
 # from .models import *
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 
 def get_accounts(request):
@@ -47,6 +48,7 @@ def delete_account(request, pk):
 def create_account(request):
     form = AccountForm()
     # form = UserCreationForm()
+    # note: issue here when creating account password: makes an invalid format that cannot be used with login form on login page
 
     if request.method == 'POST':
         form = AccountForm(request.POST)
@@ -54,6 +56,7 @@ def create_account(request):
         # should hash the password, check username/email doesnt already exist, etc
         if form.is_valid():
             form.save()
+            # could add message such as 'Account created successfully. You can now log in'
             return redirect('/login')
 
     context = {'form': form}
@@ -61,5 +64,20 @@ def create_account(request):
 
 
 def login_page(request):
+    print('--- test login ---')
+    if request.method == 'POST':
+        print('METHOD IS POST')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print('username', username, 'pw', password)
+
+        # authenticate user - ensures they're in db etc
+        user = authenticate(request, username=username, password=password)
+        print('user', user)
+        if user is not None:  # if authenticated successfully
+            login(request, user)
+            print('--- should be successful')
+            return redirect('get_accounts')
+    print('--- fail')
     context = {}
     return render(request, 'accounts/login.html', context)
