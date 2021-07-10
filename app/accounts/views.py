@@ -26,19 +26,20 @@ def get_account(request, pk):
 
 @login_required(login_url='login')
 def edit_account(request, pk):
-    # @todo: need to only allow account holders to edit their own accounts
-    account = Account.objects.get(id=pk)
-    form = AccountForm(instance=account)
+    if int(pk) is not request.user.id:
+        return redirect('get_account', str(request.user.id))
+    else:
+        account = Account.objects.get(id=pk)
+        form = AccountForm(instance=account)
 
-    if request.method == 'POST':
-        # print('post', request.POST)
-        # pass instance - without instance=account, it would create a new account
-        form = AccountForm(request.POST, instance=account)
-        if form.is_valid():
-            form.save()  # saves data to DB
+        if request.method == 'POST':
+            # pass instance - without instance=account, it would create a new account
+            form = AccountForm(request.POST, instance=account)
+            if form.is_valid():
+                form.save()  # saves data to DB
 
-    context = {'account': account, 'form': form}
-    return render(request, 'accounts/edit_account.html', context)
+        context = {'account': account, 'form': form}
+        return render(request, 'accounts/edit_account.html', context)
 
 
 @login_required(login_url='login')
