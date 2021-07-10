@@ -79,32 +79,27 @@ def create_account(request):
 
 
 def login_page(request):
-    print('--- test login ---')
-    print('HERE', request.user.id)
     if request.user.is_authenticated:
         return redirect('get_account', str(request.user.id))
     else:
         if request.method == 'POST':
-            print('METHOD IS POST')
             username = request.POST.get('username')
             password = request.POST.get('password')
-            print('username', username, 'pw', password)
 
             # authenticate user - ensures they're in db etc
             user = authenticate(request, username=username, password=password)
-            print('user', user)
+
             if user is not None:  # if authenticated successfully
                 login(request, user)
-                print('--- should be successful')
                 return redirect('get_accounts')
             else:
                 messages.info(request, "Wrong username or password.")
-        print('--- fail')
+
         context = {}
         return render(request, 'accounts/login.html', context)
 
 
-# @todo: add login required or check if user is authenticated?
-def logout(request):
+# Fn cannot be called logout, otherwise conflicts with default logout name
+def logout_user(request):
     logout(request)
     return redirect('login')
