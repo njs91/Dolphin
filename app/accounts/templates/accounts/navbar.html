@@ -12,9 +12,11 @@
         <a href="{% url 'login' %}">Login</a>
         {% endif %}
     </li>
+    {% if request.user.is_staff %}
     <li>
-        <a href="/accounts">Accounts @todo only show if admin</a>
+        <a href="/accounts">Accounts</a>
     </li>
+    {% endif %}
 </ul>
 {% if user.is_authenticated %}
 <span>hi {{request.user}}</span>
