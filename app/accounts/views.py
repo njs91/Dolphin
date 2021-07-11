@@ -6,10 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def get_accounts(request):
     accounts = Account.objects.all()
     context = {'accounts': accounts}
@@ -88,7 +89,8 @@ def login_page(request):
 
         if user is not None:  # if authenticated successfully
             login(request, user)
-            return redirect('get_accounts')
+            # return redirect('get_accounts')
+            return redirect('get_account', str(request.user.id))
         else:
             messages.info(request, "Wrong username or password.")
 
