@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.models import Group
 
 
 @login_required(login_url='login')
@@ -68,7 +69,9 @@ def create_account(request):
         # form = UserCreationForm(request.POST)
         # should hash the password, check username/email doesnt already exist, etc
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
             # could add message such as 'Account created successfully. You can now log in'
             return redirect('/login')
         else:
