@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user
 
 
 @login_required(login_url='login')
@@ -55,48 +56,44 @@ def delete_account(request, pk):
     return render(request, 'accounts/delete.html', context)
 
 
+@unauthenticated_user
 def create_account(request):
-    if request.user.is_authenticated:
-        return redirect('get_account', str(request.user.id))
-    else:
-        form = AccountForm()
-        # form = UserCreationForm()
-        # note: issue here when creating account password: makes an invalid format that cannot be used with login form on login page
+    form = AccountForm()
+    # form = UserCreationForm()
+    # note: issue here when creating account password: makes an invalid format that cannot be used with login form on login page
 
-        if request.method == 'POST':
-            form = AccountForm(request.POST)
-            # form = UserCreationForm(request.POST)
-            # should hash the password, check username/email doesnt already exist, etc
-            if form.is_valid():
-                form.save()
-                # could add message such as 'Account created successfully. You can now log in'
-                return redirect('/login')
-            else:
-                messages.info(request, "Count not create account.")
+    if request.method == 'POST':
+        form = AccountForm(request.POST)
+        # form = UserCreationForm(request.POST)
+        # should hash the password, check username/email doesnt already exist, etc
+        if form.is_valid():
+            form.save()
+            # could add message such as 'Account created successfully. You can now log in'
+            return redirect('/login')
+        else:
+            messages.info(request, "Count not create account.")
 
-        context = {'form': form}
-        return render(request, 'accounts/create_account.html', context)
+    context = {'form': form}
+    return render(request, 'accounts/create_account.html', context)
 
 
+@unauthenticated_user
 def login_page(request):
-    if request.user.is_authenticated:
-        return redirect('get_account', str(request.user.id))
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-            # authenticate user - ensures they're in db etc
-            user = authenticate(request, username=username, password=password)
+        # authenticate user - ensures they're in db etc
+        user = authenticate(request, username=username, password=password)
 
-            if user is not None:  # if authenticated successfully
-                login(request, user)
-                return redirect('get_accounts')
-            else:
-                messages.info(request, "Wrong username or password.")
+        if user is not None:  # if authenticated successfully
+            login(request, user)
+            return redirect('get_accounts')
+        else:
+            messages.info(request, "Wrong username or password.")
 
-        context = {}
-        return render(request, 'accounts/login.html', context)
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
 
 # Fn cannot be called logout, otherwise conflicts with default logout name
