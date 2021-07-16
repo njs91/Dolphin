@@ -19,6 +19,7 @@ def get_accounts(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'])
 def get_account(request, pk):
     account = Account.objects.get(id=pk)
     # subscribers = account.subscriber_set.all()
@@ -28,6 +29,7 @@ def get_account(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'])
 def edit_account(request, pk):
     if int(pk) is not request.user.id:
         return redirect('get_account', str(request.user.id))
@@ -46,6 +48,7 @@ def edit_account(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'])
 def delete_account(request, pk):
     account = Account.objects.get(id=pk)
     if request.method == 'POST':
