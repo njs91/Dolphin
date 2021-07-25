@@ -1,14 +1,11 @@
 from django.shortcuts import render, redirect
 from accounts.models import Account
 from .forms import AccountForm
-# from .models import *
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user, allowed_users
-from django.contrib.auth.models import Group
-from django.http import HttpResponse
+from core.decorators import unauthenticated_user, allowed_users
 
 
 @login_required(login_url='login')
@@ -20,11 +17,8 @@ def get_accounts(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'customer'])
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def get_account(request, pk):
-    # if the user doesn't own the account and is not an admin
-    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
-        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)
     # subscribers = account.subscriber_set.all()
     # could also use subscribers = Subscriber.objects.filter(account=account) # better?
@@ -33,28 +27,23 @@ def get_account(request, pk):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'customer'])
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def edit_account(request, pk):
-    # if the user doesn't own the account and is not an admin
-    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
-        return HttpResponse('Account does not have authorisation for access', status=401)
-        # @todo: neaten the above 2 lines? put in @decorator or something as repeated often
-    else:
-        account = Account.objects.get(id=pk)
-        form = AccountForm(instance=account)
+    account = Account.objects.get(id=pk)
+    form = AccountForm(instance=account)
 
-        if request.method == 'POST':
-            # pass instance - without instance=account, it would create a new account
-            form = AccountForm(request.POST, instance=account)
-            if form.is_valid():
-                form.save()  # saves data to DB
+    if request.method == 'POST':
+        # pass instance - without instance=account, it would create a new account
+        form = AccountForm(request.POST, instance=account)
+        if form.is_valid():
+            form.save()  # saves data to DB
 
-        context = {'account': account, 'form': form}
-        return render(request, 'accounts/edit_account.html', context)
+    context = {'account': account, 'form': form}
+    return render(request, 'accounts/edit_account.html', context)
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'customer'])
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def delete_account(request, pk):
     account = Account.objects.get(id=pk)
     if request.method == 'POST':
