@@ -4,9 +4,14 @@ from accounts.models import Account
 from subscribers.models import Subscriber
 from .forms import SubscriberForm
 from .filters import SubscriberFilter
+from django.http import HttpResponse
 
 
 def get_subscribers(request, pk):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
+        # @todo: neaten the above 2 lines? put in @decorator or something as repeated often
     account = Account.objects.get(id=pk)
     subscribers = account.subscriber_set.all()
     filter = SubscriberFilter(request.GET, queryset=subscribers)
@@ -17,6 +22,9 @@ def get_subscribers(request, pk):
 
 
 def get_subscriber(request, pk, sub_id):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)  # pk needed? it'll be in the URL
     subscriber = Subscriber.objects.get(id=sub_id)
     context = {'account': account, 'subscriber': subscriber}
@@ -24,6 +32,9 @@ def get_subscriber(request, pk, sub_id):
 
 
 def edit_subscriber(request, pk, sub_id):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)
     subscriber = Subscriber.objects.get(id=sub_id)
     form = SubscriberForm(instance=subscriber)
@@ -40,6 +51,9 @@ def edit_subscriber(request, pk, sub_id):
 
 
 def delete_subscriber(request, pk, sub_id):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)
     subscriber = Subscriber.objects.get(id=sub_id)
     if request.method == 'POST':
@@ -52,6 +66,9 @@ def delete_subscriber(request, pk, sub_id):
 
 
 def create_subscriber(request, pk):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)
     form = SubscriberForm()
 
