@@ -5,4 +5,4 @@ from .models import Subscriber
 class SubscriberForm(ModelForm):
     class Meta:
         model = Subscriber
-        fields = '__all__'
+        fields = ['first_name', 'email', 'tags']

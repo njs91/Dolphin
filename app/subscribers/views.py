@@ -68,8 +68,18 @@ def create_subscriber(request, pk):
 
     if request.method == 'POST':
         form = SubscriberForm(request.POST)
+
         if form.is_valid():
-            form.save()
+            new_sub = Subscriber.objects.create(
+                first_name=form['first_name'].value(),
+                email=form['email'].value(),
+                account=account
+            )
+
+            new_sub.tags.set(form['tags'].value())
+            # for tag in form['tags'].value(): # could also add the tags in a for loop
+            #     new_sub.tags.add(tag)
+            new_sub.save()
             redirect_url = '/accounts/' + pk + '/subscribers/'
             return redirect(redirect_url)
 
