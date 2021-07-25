@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'subscribers',
     'django_filters',
     'accounts.apps.AccountsConfig',
+    'core',
 
     # django apps
     'django.contrib.admin',
