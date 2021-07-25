@@ -35,8 +35,10 @@ def get_account(request, pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'])
 def edit_account(request, pk):
-    if int(pk) is not request.user.id:
-        return redirect('get_account', str(request.user.id))
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
+        # @todo: neaten the above 2 lines? put in @decorator or something as repeated often
     else:
         account = Account.objects.get(id=pk)
         form = AccountForm(instance=account)
