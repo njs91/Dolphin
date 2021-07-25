@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
+from django.http import HttpResponse
 
 
 @login_required(login_url='login')
@@ -21,6 +22,9 @@ def get_accounts(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'])
 def get_account(request, pk):
+    # if the user doesn't own the account and is not an admin
+    if int(pk) is not request.user.id and not request.user.groups.filter(name__in=['admin']).exists():
+        return HttpResponse('Account does not have authorisation for access', status=401)
     account = Account.objects.get(id=pk)
     # subscribers = account.subscriber_set.all()
     # could also use subscribers = Subscriber.objects.filter(account=account) # better?

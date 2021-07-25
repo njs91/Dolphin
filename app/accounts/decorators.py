@@ -19,6 +19,6 @@ def allowed_users(allowed_roles=[]):
             if request.user.groups.filter(name__in=allowed_roles).exists():
                 return view_fn(request, *args, **kwargs)
             else:
-                return HttpResponse('Account does not have authorisation for access')
+                return HttpResponse('Account does not have authorisation for access', status=401)
         return wrapper_fn
     return decorator
