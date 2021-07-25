@@ -72,7 +72,10 @@ def create_account(request):
         # form = UserCreationForm(request.POST)
         # should hash the password, check username/email doesnt already exist, etc
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            # required, otherwise password not hashed
+            user.set_password(form.cleaned_data["password"])
+            user.save()
             # group = Group.objects.get(name='customer') #group now added via signal 'default_account_settings
             # user.groups.add(group)
             # could add message such as 'Account created successfully. You can now log in'
