@@ -11,6 +11,8 @@ class SubscriberInline(admin.TabularInline):
 
 class AccountAdmin(UserAdmin):
     inlines = [SubscriberInline, ]
+    list_display = ("first_name", "plan", "email")
+    # fields = ("first_name", "plan", "email")
 
 
 admin.site.register(Account, AccountAdmin)
