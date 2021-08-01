@@ -56,3 +56,17 @@ def message_edit(request, pk, message_id):
 
     context = {'message': message, 'form': form, 'account': account}
     return render(request, 'messages/message_edit.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
+def message_delete(request, pk, message_id):
+    account = Account.objects.get(id=pk)
+    message = Message.objects.get(id=message_id)
+    if request.method == 'POST':
+        message.delete()
+        redirect_url = '/account/' + pk + '/messages/'
+        return redirect(redirect_url)
+
+    context = {'account': account, 'message': message}
+    return render(request, 'messages/message_delete.html', context)

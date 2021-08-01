@@ -1,0 +1,12 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<p>Are you sure you want to delete message {{message}}?</p>
+
+<form action="{% url 'message_delete' account.id message.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="confirm">
+</form>
+
+{% endblock %}
