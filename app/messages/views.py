@@ -28,4 +28,13 @@ def message_create(request, pk):
             return redirect(redirect_url)
 
     context = {'form': form, 'account': account}
-    return render(request, 'subscribers/create.html', context)
+    return render(request, 'messages/message_create.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
+def message_view(request, pk, message_id):
+    account = Account.objects.get(id=pk)  # pk needed? it'll be in the URL
+    message = Message.objects.get(id=message_id)
+    context = {'account': account, 'message': message}
+    return render(request, 'messages/message_view.html', context)
