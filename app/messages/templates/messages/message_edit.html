@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h1>Create an Email Message</h1>
-<form action="{% url 'message_create' account.id %}" method="POST">
+<h1>Edit page for {{message}}</h1>
+<form action="{% url 'message_edit' account.id message.id %}" method="POST">
 	{% csrf_token %}
 	{{form.as_p}}
 	<input type="submit" name="submit">

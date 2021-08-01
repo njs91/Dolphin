@@ -38,3 +38,21 @@ def message_view(request, pk, message_id):
     message = Message.objects.get(id=message_id)
     context = {'account': account, 'message': message}
     return render(request, 'messages/message_view.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
+def message_edit(request, pk, message_id):
+    account = Account.objects.get(id=pk)
+    message = Message.objects.get(id=message_id)
+    form = MessageForm(instance=message)
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST, instance=message)
+        if form.is_valid():
+            form.save()
+            redirect_url = '/accounts/' + pk + '/messages/' + message_id
+            return redirect(redirect_url)
+
+    context = {'message': message, 'form': form, 'account': account}
+    return render(request, 'messages/message_edit.html', context)
