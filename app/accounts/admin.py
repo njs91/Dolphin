@@ -12,7 +12,8 @@ class SubscriberInline(admin.TabularInline):
 class AccountAdmin(UserAdmin):
     inlines = [SubscriberInline, ]
     list_display = ("first_name", "plan", "email")
-    # fields = ("first_name", "plan", "email")
+
+    # @todo: bug! plan field not showing in django admin on individual account pages
 
 
 admin.site.register(Account, AccountAdmin)

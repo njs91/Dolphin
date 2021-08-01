@@ -8,7 +8,7 @@
 	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a href='/accounts/'>Back to Accounts</a>
+<a href='{% url "login" %}'>Back to Login</a>
 
 {% for message in messages %}
 {{message}}

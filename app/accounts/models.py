@@ -10,6 +10,8 @@ class Account(AbstractUser):
 
     plan = models.CharField(max_length=10, choices=PLANS, default="free")
 
+    # @todo: bug! plan field not showing in django admin on individual account pages
+
     def __str__(self) -> str:
         return self.first_name
     # need to add fields: em_messages, automations, landing_pages

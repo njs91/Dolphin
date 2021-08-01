@@ -36,7 +36,10 @@ def edit_account(request, pk):
         # pass instance - without instance=account, it would create a new account
         form = AccountForm(request.POST, instance=account)
         if form.is_valid():
-            form.save()  # saves data to DB
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
+            return redirect('/login')
 
     context = {'account': account, 'form': form}
     return render(request, 'accounts/edit_account.html', context)
