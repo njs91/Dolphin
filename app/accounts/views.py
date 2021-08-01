@@ -39,7 +39,8 @@ def edit_account(request, pk):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
             user.save()
-            return redirect('/login')
+            redirect_url = '/accounts/' + pk
+            return redirect(redirect_url)
 
     context = {'account': account, 'form': form}
     return render(request, 'accounts/edit_account.html', context)
