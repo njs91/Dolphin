@@ -1,0 +1,16 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<h1>Create an Email Message</h1>
+<form action="{% url 'message_create' %}" method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" name="submit">
+</form>
+
+{% for message in messages %}
+{{message}}
+{% endfor %}
+
+{% endblock %}

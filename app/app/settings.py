@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django_filters',
     'accounts.apps.AccountsConfig',
     'core',
+    'messages',
+    # 'messages.apps.MessagesConfig',
+    # 'email.messages',
 
     # django apps
     'django.contrib.admin',
