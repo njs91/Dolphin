@@ -78,7 +78,7 @@ def create_account(request):
             # group = Group.objects.get(name='customer') #group now added via signal 'default_account_settings
             # user.groups.add(group)
             # could add message such as 'Account created successfully. You can now log in'
-            return redirect('/login')
+            return redirect('/accounts/create_success')
         else:
             messages.info(request, "Count not create account.")
 
@@ -87,6 +87,11 @@ def create_account(request):
 
 
 @unauthenticated_user
+def account_create_success(request):
+    return render(request, 'accounts/account_create_success.html')
+
+
+@ unauthenticated_user
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')

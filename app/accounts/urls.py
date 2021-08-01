@@ -9,6 +9,8 @@ urlpatterns = [
          name="edit_account"),
     path('accounts/<str:pk>/delete/', views.delete_account, name="delete_account"),
     path('accounts/create', views.create_account, name="create_account"),
+    path('accounts/create_success', views.account_create_success,
+         name="account_create_success"),
     path('login/', views.login_page, name="login"),
     path('logout/', views.logout_user, name="logout"),
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="accounts/reset_password.html"),
