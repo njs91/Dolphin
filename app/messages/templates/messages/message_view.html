@@ -6,7 +6,8 @@
 <h2>Message {{message}}</h2>
 <p>Name: {{message.name}}</p>
 <p>Subject: {{message.subject}}</p>
-<p>text: {{message.text}}</p>
+<p>Content: {{message.text}}</p>
+<p>Created: {{message.date_created}}</p>
 <a href='/accounts/{{account.id}}/messages/{{message.id}}/edit'>Edit Message</a>
 <a href='/accounts/{{account.id}}/messages'>Back to Messages</a>
 

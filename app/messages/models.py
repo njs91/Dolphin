@@ -7,6 +7,7 @@ class Message(models.Model):
     subject = models.CharField(max_length=128)
     text = models.TextField()
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
     #automations = models.ManyToMainField(Automation)
 
     def __str__(self):

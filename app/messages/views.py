@@ -3,8 +3,21 @@ from django.shortcuts import render, redirect
 from accounts.models import Account
 from messages.models import Message
 from .forms import MessageForm
+from .filters import MessageFilter
 from django.contrib.auth.decorators import login_required
 from core.decorators import allowed_users
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
+def message_list(request, pk):
+    account = Account.objects.get(id=pk)
+    messages = account.message_set.all()
+    filter = MessageFilter(request.GET, queryset=messages)
+    messages = filter.qs
+    context = {'account': account,
+               'messages': messages, 'filter': filter}
+    return render(request, 'messages/message_list.html', context)
 
 
 @login_required(login_url='login')
