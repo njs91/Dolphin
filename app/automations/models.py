@@ -1,15 +1,14 @@
 from django.db import models
 from accounts.models import Account
-# from automations.models import Automation
+from messages.models import Message
 
 
-class Message(models.Model):
+class Automation(models.Model):
     name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=128)
-    text = models.TextField()
+    description = models.CharField(max_length=200)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    # automations = models.ManyToMainField(Automation)
+    # messages = models.ManyToMainField(Message)
 
     def __str__(self):
         return self.name

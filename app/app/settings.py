@@ -34,11 +34,12 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # my apps
     # 'accounts',
-    'subscribers',
     'django_filters',
     'accounts.apps.AccountsConfig',
+    'automations',
     'core',
     'messages',
+    'subscribers',
     # 'messages.apps.MessagesConfig',
     # 'email.messages',
 
