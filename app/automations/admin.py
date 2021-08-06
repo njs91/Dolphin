@@ -4,6 +4,7 @@ from messages.models import Message
 
 
 # class MessageInline(admin.TabularInline):
+#     model = Message.members.through
 #     model = Message
 #     extra = 0
 
@@ -11,6 +12,7 @@ from messages.models import Message
 @admin.register(Automation)
 class AutomationAdmin(admin.ModelAdmin):
     list_display = ("name", "description", "account", "date_created")
-    fields = ("name", "description", "account")  # @todo: add messages
+    fields = ("name", "description", "account",
+              "messages")  # @todo: add messages
     list_filter = ('date_created',)
     # inlines = [MessageInline, ]
