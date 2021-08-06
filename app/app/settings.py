@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'core',
     'messages',
     'subscribers',
-    # 'messages.apps.MessagesConfig',
-    # 'email.messages',
 
     # django apps
     'django.contrib.admin',
