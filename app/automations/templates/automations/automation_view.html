@@ -7,7 +7,18 @@
 <p>Name: {{automation.name}}</p>
 <p>Description: {{automation.description}}</p>
 <p>Created: {{automation.date_created}}</p>
-<p>@todo: LIST ALL OF ITS MESSAGES</p>
+
+{% for message in messages %}
+<div>
+    <h2>Message {{message}}</h2>
+    <p>Name: {{message.name}}</p>
+    <p>Subject: {{message.subject}}</p>
+    <p>Content: {{message.text}}</p>
+    <p>Created: {{message.date_created}}</p>
+</div>
+{% endfor %}
+
+
 <a href='/accounts/{{account.id}}/automations/{{automation.id}}/edit'>Edit Automation</a>
 <a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
 
