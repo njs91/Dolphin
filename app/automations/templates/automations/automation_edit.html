@@ -1,0 +1,18 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<h1>Edit page for {{automation}}</h1>
+<form action="{% url 'automation_edit' account.id automation.id %}" method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" name="submit">
+</form>
+<a href='/accounts/{{account.id}}/automations/{{automation.id}}/delete'>Delete Automation</a>
+<a href='/accounts/{{account.id}}/automations/{{automation.id}}'>Back to Automation</a>
+
+{% for message in messages %}
+{{message}}
+{% endfor %}
+
+{% endblock %}

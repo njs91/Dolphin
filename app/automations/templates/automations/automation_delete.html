@@ -1,0 +1,14 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<p>Are you sure you want to delete automation {{automation}}?</p>
+
+<form action="{% url 'automation_delete' account.id automation.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="confirm">
+</form>
+
+<a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
+
+{% endblock %}

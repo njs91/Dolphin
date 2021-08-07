@@ -1,0 +1,18 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<h1>Create an Automation</h1>
+<form action="{% url 'automation_create' account.id %}" method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" name="submit">
+</form>
+
+<a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
+
+{% for message in messages %}
+{{message}}
+{% endfor %}
+
+{% endblock %}

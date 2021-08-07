@@ -1,0 +1,14 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+<h1>Automation Page</h1>
+<h2>Automation {{automation}}</h2>
+<p>Name: {{automation.name}}</p>
+<p>Description: {{automation.description}}</p>
+<p>Created: {{automation.date_created}}</p>
+<p>@todo: LIST ALL OF ITS MESSAGES</p>
+<a href='/accounts/{{account.id}}/automations/{{automation.id}}/edit'>Edit Automation</a>
+<a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
+
+{% endblock %}

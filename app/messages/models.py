@@ -8,7 +8,7 @@ class Message(models.Model):
     text = models.TextField()
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    automations = models.ManyToManyField('automations.Automation')
+    automations = models.ManyToManyField('automations.Automation', blank=True)
 
     def __str__(self):
         return self.name

@@ -1,0 +1,27 @@
+{% extends 'core/main.html' %}
+{% block content %}
+<h1>Automations Page</h1>
+<h2>Automations for {{account}}</h2>
+<form method="get">
+  {{filter.form}}
+  <button type="submit">Search</button>
+</form>
+<table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+    {% for automation in automations %}
+    <tr>
+        <td>{{automation.name}}</td>
+        <td>{{automation.date_created}}</td>
+        <td>
+            <a href="/accounts/{{account.id}}/automations/{{automation.id}}">View</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href='/accounts/{{account.id}}'>View Account</a>
+  <a href='/accounts/{{account.id}}/automations/create'>Create Automation</a>
+{% endblock %}
