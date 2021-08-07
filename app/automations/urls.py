@@ -11,5 +11,7 @@ urlpatterns = [
     path('accounts/<str:pk>/automations/<str:automation_id>/edit',
          views.automation_edit, name="automation_edit"),
     path('accounts/<str:pk>/automations/<str:automation_id>/delete',
-         views.automation_delete, name="automation_delete")
+         views.automation_delete, name="automation_delete"),
+    path('accounts/<str:pk>/automations/<str:automation_id>/add_message',
+         views.automation_add_message, name="automation_add_message"),
 ]

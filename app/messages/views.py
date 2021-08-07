@@ -37,7 +37,7 @@ def message_create(request, pk):
                 account=account
             )
             new_message.save()
-            redirect_url = '/accounts/' + pk + '/messages/'
+            redirect_url = '/accounts/' + pk + '/messages'
             return redirect(redirect_url)
 
     context = {'form': form, 'account': account}

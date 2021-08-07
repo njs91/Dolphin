@@ -8,6 +8,33 @@
 	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
+
+<h2>Add a message to this automation:</h2>
+<form action="{% url 'automation_add_message' account.id automation.id %}" method="POST">
+	{% csrf_token %}
+	<select name="message_id" required>
+		{% for message in messages %}
+		<option value="{{message.id}}">{{message.name}}</option>
+		{% endfor %}
+	</select>
+	<input type="submit" name="submit">
+</form>
+
+<p>@todo: allow adding/deleting messages to automations</p>
+<p>To add:</p>
+<ol>
+	<li>list all messages - excluding those already part of automation - as select form options</li>
+	<li>on submit, post the data to a Fn in the back-end</li>
+	<li>Use the post request data to find the selected message via a queryset & store in a variable</li>
+	<li>Add that message to the automation and save</li>
+</ol>
+<p>To delete:</p>
+<ol>
+	<li>list all messages - only those that are part of automation - as select form options</li>
+	<li>on submit, post the data to a Fn in the back-end</li>
+	<li>Use the post request data to find the selected message via a queryset & store in a variable</li>
+	<li>Remove that message to the automation and save</li>
+</ol>
 <a href='/accounts/{{account.id}}/automations/{{automation.id}}/delete'>Delete Automation</a>
 <a href='/accounts/{{account.id}}/automations/{{automation.id}}'>Back to Automation</a>
 

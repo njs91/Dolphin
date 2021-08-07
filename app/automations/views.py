@@ -61,6 +61,10 @@ def automation_edit(request, pk, automation_id):
     account = Account.objects.get(id=pk)
     automation = Automation.objects.get(id=automation_id)
     form = AutomationForm(instance=automation)
+    messages = account.message_set.all().exclude(
+        automations__account=account)  # @todo: is this optimal?
+
+    print('messages', messages)
 
     if request.method == 'POST':
         form = AutomationForm(request.POST, instance=automation)
@@ -69,7 +73,8 @@ def automation_edit(request, pk, automation_id):
             redirect_url = '/accounts/' + pk + '/automations/' + automation_id
             return redirect(redirect_url)
 
-    context = {'automation': automation, 'form': form, 'account': account}
+    context = {'automation': automation, 'form': form,
+               'account': account, 'messages': messages}
     return render(request, 'automations/automation_edit.html', context)
 
 
@@ -85,3 +90,16 @@ def automation_delete(request, pk, automation_id):
 
     context = {'account': account, 'automation': automation}
     return render(request, 'automations/automation_delete.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
+def automation_add_message(request, pk, automation_id):
+    # print(request.POST.message_id)
+    pass
+    # account = Account.objects.get(id=pk)
+    # automation = Automation.objects.get(id=automation_id)
+    # if request.method == 'POST':
+    #     automation.delete()
+    #     redirect_url = '/accounts/' + pk + '/automations'
+    #     return redirect(redirect_url)
