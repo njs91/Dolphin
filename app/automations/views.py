@@ -81,7 +81,10 @@ def automation_edit(request, pk, automation_id):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def automation_delete(request, pk, automation_id):
-    account = Account.objects.get(id=pk)
+    try:
+        account = Account.objects.get(id=pk)
+    except ValueError:
+        print('Could not fetch account')
     automation = Automation.objects.get(id=automation_id)
     if request.method == 'POST':
         automation.delete()
