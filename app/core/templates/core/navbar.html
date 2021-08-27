@@ -6,6 +6,15 @@
     <li>
         <a href="/accounts/{{request.user.id}}">My Account</a>
     </li>
+    <li>
+        <a href='/accounts/{{account.id}}/subscribers'>View Subscribers</a>
+    </li>
+    <li>
+        <a href='/accounts/{{account.id}}/messages'>View Messages</a>
+    </li>
+    <li>
+        <a href='/accounts/{{account.id}}/automations'>View Automations</a>
+    </li>
     {% endif %}
     <li>
         {% if user.is_authenticated %}

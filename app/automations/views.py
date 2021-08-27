@@ -101,43 +101,26 @@ def automation_delete(request, pk, automation_id):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def automation_add_message(request, pk, automation_id):
-    account = Account.objects.get(id=pk)
-    automation = Automation.objects.get(id=automation_id)
-
-    if request.method == 'POST':
+    try:
+        automation = Automation.objects.get(id=automation_id)
         msgId = request.POST.get('message_id')
         msg = Message.objects.get(id=msgId)
         automation.messages.add(msg)
-        redirect_url = '/accounts/' + pk + '/automations'
-        return redirect(redirect_url)
-
-    pass
+    except ValueError:
+        print('Could not query data')
+    redirect_url = '/accounts/' + pk + '/automations'
+    return redirect(redirect_url)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def automation_remove_message(request, pk, automation_id):
-    account = Account.objects.get(id=pk)
-    automation = Automation.objects.get(id=automation_id)
-
-    if request.method == 'POST':
+    try:
+        automation = Automation.objects.get(id=automation_id)
         msgId = request.POST.get('message_id')
         msg = Message.objects.get(id=msgId)
-        print('before', automation.__dict__)
-        # automation.messages.set(msg)  # error here @todo
-        # automation.messages.append(msg)
-        # automation.messages.add(msg)  # does not work
-        # automation['messages'] = msg
-        # also fails with TypeError: 'Message' object is not iterable
-        print('msg', msg.__dict__)
-        print('before*************wtf', automation.messages.all())
         automation.messages.remove(msg)
-        print('a*************wtf', automation.messages.all())
-        # automation.messages.set([msg])
-        print('after', automation.__dict__)
-        # automation.save()
-        # print('saved')
-        redirect_url = '/accounts/' + pk + '/automations'
-        return redirect(redirect_url)
-
-    pass
+    except ValueError:
+        print('Could not query data')
+    redirect_url = '/accounts/' + pk + '/automations'
+    return redirect(redirect_url)

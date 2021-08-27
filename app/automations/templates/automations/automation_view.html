@@ -3,21 +3,22 @@
 {% block content %}
 
 <h1>Automation Page</h1>
-<h2>Automation {{automation}}</h2>
-<p>Name: {{automation.name}}</p>
-<p>Description: {{automation.description}}</p>
-<p>Created: {{automation.date_created}}</p>
 
-{% for message in messages %}
-<div>
-    <h2>Message {{message}}</h2>
-    <p>Name: {{message.name}}</p>
-    <p>Subject: {{message.subject}}</p>
-    <p>Content: {{message.text}}</p>
-    <p>Created: {{message.date_created}}</p>
-</div>
-{% endfor %}
+<h2>Details:</h2>
+<ul>
+    <li>Name: {{automation.name}}</li>
+    <li>Description: {{automation.description}}</li>
+    <li>Created: {{automation.date_created}}</li>
+</ul>
 
+{% if messages %}
+<h2>Messages:</h2>
+<ol class='messages'>
+    {% for message in messages %}
+    <li>{{message.name}}</li>
+    {% endfor %}
+</ol>
+{% endif %}
 
 <a href='/accounts/{{account.id}}/automations/{{automation.id}}/edit'>Edit Automation</a>
 <a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
