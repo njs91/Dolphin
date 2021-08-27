@@ -14,4 +14,6 @@ urlpatterns = [
          views.automation_delete, name="automation_delete"),
     path('accounts/<str:pk>/automations/<str:automation_id>/add_message',
          views.automation_add_message, name="automation_add_message"),
+    path('accounts/<str:pk>/automations/<str:automation_id>/remove_message',
+         views.automation_remove_message, name="automation_remove_message")
 ]
