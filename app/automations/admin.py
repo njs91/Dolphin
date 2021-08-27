@@ -13,6 +13,6 @@ from messages.models import Message
 class AutomationAdmin(admin.ModelAdmin):
     list_display = ("name", "description", "account", "date_created")
     fields = ("name", "description", "account",
-              "messages")  # @todo: add messages
+              "messages")
     list_filter = ('date_created',)
     # inlines = [MessageInline, ]

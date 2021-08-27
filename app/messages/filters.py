@@ -9,5 +9,5 @@ class MessageFilter(django_filters.FilterSet):
 
     class Meta:
         model = Message  # model we’re building filter for
-        fields = '__all__'  # which fields do we wanna allow
-        exclude = ['account', 'date_created']  # exclude these fields
+        fields = '__all__'
+        exclude = ['account', 'date_created']

@@ -28,27 +28,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
+MY_APPS = ['django_filters',
+           'accounts.apps.AccountsConfig',
+           'automations',
+           'core',
+           'messages',
+           'subscribers']
 
-INSTALLED_APPS = [
-    # my apps
-    # 'accounts',
-    'django_filters',
-    'accounts.apps.AccountsConfig',
-    'automations',
-    'core',
-    'messages',
-    'subscribers',
+DJANGO_APPS = ['django.contrib.admin',
+               'django.contrib.auth',
+               'django.contrib.contenttypes',
+               'django.contrib.sessions',
+               'django.contrib.messages',
+               'django.contrib.staticfiles', ]
 
-    # django apps
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
+INSTALLED_APPS = MY_APPS + DJANGO_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

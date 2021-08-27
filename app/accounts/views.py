@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from accounts.models import Account
 from .forms import AccountForm
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -20,8 +19,6 @@ def get_accounts(request):
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def get_account(request, pk):
     account = Account.objects.get(id=pk)
-    # subscribers = account.subscriber_set.all()
-    # could also use subscribers = Subscriber.objects.filter(account=account) # better?
     context = {'account': account}
     return render(request, 'accounts/account.html', context)
 
@@ -102,7 +99,6 @@ def login_page(request):
 
         if user is not None:  # if authenticated successfully
             login(request, user)
-            # return redirect('get_accounts')
             return redirect('get_account', str(request.user.id))
         else:
             messages.info(request, "Wrong username or password.")
