@@ -8,7 +8,9 @@
 	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a class="button type2" href='{% url "login" %}'>Back to Login</a>
+<div class="buttons-container">
+	<a class="button type2" href='{% url "login" %}'>Back to Login</a>
+</div>
 
 {% for message in messages %}
 {{message}}

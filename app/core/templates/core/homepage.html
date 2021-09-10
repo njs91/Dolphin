@@ -3,10 +3,16 @@
 {% block content %}
 
 <h1>Email Demo App</h1>
-<p>Welcome to the email demo app.</p>
+<p>{% if user.is_authenticated %}Hi {{request.user}}. What would you like to see?{% else %}Welcome to the email demo app. Create an account to see some basic CRUD functionality.{% endif %}</p>
 <div class="buttons-container">
+    {% if not user.is_authenticated %}
     <a class="button" href='{% url "login" %}'>Login</a>
     <a class="button type2"  href='{% url "create_account" %}'>Create Account</a>
+    {% else %}
+    <a class="button" href='{% url "get_subscribers" request.user.id %}'>Subscribers</a>
+    <a class="button" href='{% url "message_list" request.user.id %}'>Messages</a>
+    <a class="button" href='{% url "automation_list" request.user.id %}'>Automations</a>
+    {% endif %}
 </div>
 
 {% endblock %}

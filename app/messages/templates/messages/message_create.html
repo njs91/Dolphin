@@ -3,13 +3,15 @@
 {% block content %}
 
 <h1>Create an Email Message</h1>
-<form action="{% url 'message_create' account.id %}" method="POST">
+<form action="{% url 'message_create' account.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
 	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
 
-<a href='/accounts/{{account.id}}/messages'>Back to Messages</a>
+<div class="buttons-container">
+	<a class="button type2" href='/accounts/{{account.id}}/messages'>Back to Messages</a>
+</div>
 
 {% for message in messages %}
 {{message}}

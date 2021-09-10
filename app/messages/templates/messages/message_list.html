@@ -7,22 +7,24 @@
   {{filter.form.as_p}}
   <button class="button" type="submit">Search</button>
 </form>
-<table style="width:100%">
-    <tr>
-      <th>Name</th>
-      <th>Created</th>
-      <th></th>
-    </tr>
-    {% for message in messages %}
-    <tr>
-        <td>{{message.name}}</td>
-        <td>{{message.date_created}}</td>
-        <td>
-            <a class="button" href="/accounts/{{account.id}}/messages/{{message.id}}">View</a>
-        </td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="table-wrap">
+  <table style="width:100%">
+      <tr>
+        <th>Name</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+      {% for message in messages %}
+      <tr>
+          <td>{{message.name}}</td>
+          <td>{{message.date_created}}</td>
+          <td>
+              <a class="button" href="/accounts/{{account.id}}/messages/{{message.id}}">View</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
   <div class="buttons-container">
     <a class="button" href='/accounts/{{account.id}}/messages/create'>Create Message</a>
     <a class="button type2" href='/accounts/{{account.id}}'>View Account</a>

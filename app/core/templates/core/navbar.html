@@ -8,13 +8,13 @@
             <a href="/accounts/{{request.user.id}}">My Account</a>
         </li>
         <li>
-            <a href='/accounts/{{account.id}}/subscribers'>Subscribers</a>
+            <a href='{% url "get_subscribers" request.user.id %}'>Subscribers</a>
         </li>
         <li>
-            <a href='/accounts/{{account.id}}/messages'>Messages</a>
+            <a href='{% url "message_list" request.user.id %}'>Messages</a>
         </li>
         <li>
-            <a href='/accounts/{{account.id}}/automations'>Automations</a>
+            <a href='{% url "automation_list" request.user.id %}'>Automations</a>
         </li>
         {% endif %}
         <li class="end">

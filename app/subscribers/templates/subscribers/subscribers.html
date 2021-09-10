@@ -7,33 +7,35 @@
   {{filter.form.as_p}}
   <button class="button" type="submit">Search</button>
 </form>
-<table style="width:100%">
-    <tr>
-      <th>Forename</th>
-      <th>Email</th>
-      <th>Tags</th>
-      <th>Subscription Date</th>
-      <th></th>
-    </tr>
-    {% for sub in subscribers %}
-    <tr>
-        <td>{{sub.first_name}}</td>
-        <td>{{sub.email}}</td>
-        <td>
-          {% for tag in sub.tags.get_queryset %}
-          {{tag.name}}{%if not forloop.last%},{%endif%}
-          {% endfor %}
-          {% if not sub.tags.get_queryset %}
-          None
-          {% endif %}
-        </td>
-        <td>{{sub.date_joined}}</td>
-        <td>
-            <a class='button' href="/accounts/{{account.id}}/subscribers/{{sub.id}}">View</a>
-        </td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="table-wrap">
+  <table style="width:100%">
+      <tr>
+        <th>Forename</th>
+        <th>Email</th>
+        <th>Tags</th>
+        <th>Subscription Date</th>
+        <th></th>
+      </tr>
+      {% for sub in subscribers %}
+      <tr>
+          <td>{{sub.first_name}}</td>
+          <td>{{sub.email}}</td>
+          <td>
+            {% for tag in sub.tags.get_queryset %}
+            {{tag.name}}{%if not forloop.last%},{%endif%}
+            {% endfor %}
+            {% if not sub.tags.get_queryset %}
+            None
+            {% endif %}
+          </td>
+          <td>{{sub.date_joined}}</td>
+          <td>
+              <a class='button' href="/accounts/{{account.id}}/subscribers/{{sub.id}}">View</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
   <div class="buttons-container">
     <a class='button' href='/accounts/{{account.id}}/subscribers/create'>Create Subscriber</a>
     <a class='button type2' href='/accounts/{{account.id}}'>View Account</a>
