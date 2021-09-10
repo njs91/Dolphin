@@ -8,6 +8,18 @@
 <p>Content: {{message.text}}</p>
 <p>Created: {{message.date_created}}</p>
 <p>@todo: list automations associated with the message?</p>
+
+{% if automations %}
+<h2>Automations:</h2>
+<ol class='messages'>
+    {% for automation in automations %}
+    <li>{{automation.name}}</li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>There are no automations associated with this message.</p>
+{% endif %}
+
 <div class="buttons-container">
     <a class="button" href='/accounts/{{account.id}}/messages/{{message.id}}/edit'>Edit Message</a>
     <a class="button type2" href='/accounts/{{account.id}}/messages'>Back to Messages</a>

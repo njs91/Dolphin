@@ -6,6 +6,7 @@ from .forms import MessageForm
 from .filters import MessageFilter
 from django.contrib.auth.decorators import login_required
 from core.decorators import allowed_users
+from automations.filters import AutomationFilter
 
 
 @login_required(login_url='login')
@@ -48,6 +49,9 @@ def message_create(request, pk):
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def message_view(request, pk, message_id):
     account = Account.objects.get(id=pk)  # pk needed? it'll be in the URL
+    automations = account.automation_set.all()
+    filter = AutomationFilter(request.GET, queryset=automations)
+    automations = filter.qs
     message = Message.objects.get(id=message_id)
     context = {'account': account, 'message': message}
     return render(request, 'messages/message_view.html', context)
