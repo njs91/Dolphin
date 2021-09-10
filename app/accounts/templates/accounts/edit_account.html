@@ -2,27 +2,15 @@
 
 {% block content %}
 
-<h1>Edit Account Page for {{account}}</h1>
-{% if account.email %}
-<p>Email: {{account.email}}</p>
-{% endif %}
-{% if account.username %}
-<p>Username: {{account.username}}</p>
-{% endif %}
-{% if account.first_name %}
-<p>First Name: {{account.first_name}}</p>
-{% endif %}
-{% if account.last_name %}
-<p>Last Name: {{account.last_name}}</p>
-{% endif %}
-
-<p>Edit Account Form:</p>
-<form action="{% url 'edit_account' account.id %}" method="POST">
+<h1>Edit Account</h1>
+<form action="{% url 'edit_account' account.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
-	{{form}}
+	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a href='/accounts/{{account.id}}/delete'>Delete Account</a>
-<a href='/accounts/{{account.id}}/'>Back to Account</a>
+<div class="buttons-container">
+	<a class="button type3" href='/accounts/{{account.id}}/delete'>Delete Account</a>
+	<a class="button type2" href='/accounts/{{account.id}}/'>Back to Account</a>
+</div>
 
 {% endblock %}

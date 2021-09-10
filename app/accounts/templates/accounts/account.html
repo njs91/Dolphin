@@ -8,9 +8,6 @@
 <p>Email: {{account.email}}</p>
 <p>Date Joned: {{account.date_joined}}</p>
 <p>Plan: {{account.plan}}</p>
-<a href='/accounts/{{account.id}}/edit'>Edit Account</a>
-<a href='/accounts/{{account.id}}/subscribers'>View Subscribers</a>
-<a href='/accounts/{{account.id}}/messages'>View Messages</a>
-<a href='/accounts/{{account.id}}/automations'>View Automations</a>
+<a class="button" href='/accounts/{{account.id}}/edit'>Edit Account</a>
 
 {% endblock %}

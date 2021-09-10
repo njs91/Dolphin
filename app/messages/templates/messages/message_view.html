@@ -2,14 +2,15 @@
 
 {% block content %}
 
-<h1>Message Page</h1>
-<h2>Message {{message}}</h2>
+<h1>Message {{message}}</h1>
 <p>Name: {{message.name}}</p>
 <p>Subject: {{message.subject}}</p>
 <p>Content: {{message.text}}</p>
 <p>Created: {{message.date_created}}</p>
-<p>@todo: list automations associates with the message?</p>
-<a href='/accounts/{{account.id}}/messages/{{message.id}}/edit'>Edit Message</a>
-<a href='/accounts/{{account.id}}/messages'>Back to Messages</a>
+<p>@todo: list automations associated with the message?</p>
+<div class="buttons-container">
+    <a class="button" href='/accounts/{{account.id}}/messages/{{message.id}}/edit'>Edit Message</a>
+    <a class="button type2" href='/accounts/{{account.id}}/messages'>Back to Messages</a>
+</div>
 
 {% endblock %}

@@ -4,7 +4,9 @@
 
 <h1>Email Demo App</h1>
 <p>Welcome to the email demo app.</p>
-<a href='{% url "login" %}'>Login</a>
-<a href='{% url "create_account" %}'>Create Account</a>
+<div class="buttons-container">
+    <a class="button" href='{% url "login" %}'>Login</a>
+    <a class="button type2"  href='{% url "create_account" %}'>Create Account</a>
+</div>
 
 {% endblock %}

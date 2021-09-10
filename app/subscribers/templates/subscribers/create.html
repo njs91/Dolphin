@@ -2,12 +2,13 @@
 
 {% block content %}
 
-<p>Create Subscriber Form:</p>
-<form action="{% url 'create_subscriber' account.id %}" method="POST">
+<h1>Create Subscriber Form</h1>
+<form action="{% url 'create_subscriber' account.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
-	{{form}}
+	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a href='/accounts/{{account.id}}/subscribers'>Back to Subscribers</a>
-
+<div class="buttons-container">
+	<a class="button type2" href='/accounts/{{account.id}}/subscribers'>Back to Subscribers</a>
+</div>
 {% endblock %}

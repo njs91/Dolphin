@@ -3,13 +3,13 @@
 {% block content %}
 
 <h1>Edit Subscriber Page for {{subscriber}}</h1>
-<p>Edit Subscriber Form:</p>
-<form action="{% url 'edit_subscriber' account.id subscriber.id %}" method="POST">
+<form action="{% url 'edit_subscriber' account.id subscriber.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
-	{{form}}
+	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/delete'>Delete Subscriber</a>
-<a href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}'>Back to Subscriber</a>
-
+<div class="buttons-container">
+	<a class="button type3" href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/delete'>Delete Subscriber</a>
+	<a class="button type2" href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}'>Back to Subscriber</a>
+</div>
 {% endblock %}

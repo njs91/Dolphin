@@ -1,7 +1,6 @@
 {% extends 'core/main.html' %}
 {% block content %}
-<h1>Subscriber Page</h1>
-<h2>Subscriber {{subscriber}}</h2>
+<h1>Subscriber {{subscriber}}</h1>
 <p>Forename: {{subscriber.first_name}}</p>
 <p>Email: {{subscriber.email}}</p>
 <p>Tags: {% for tag in subscriber.tags.get_queryset %}
@@ -12,7 +11,9 @@
     {% endif %}</p>
 <p>Date Joined: {{subscriber.date_joined}}</p>
 <p>Verified: {{subscriber.verified}}</p>
-<a href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/edit'>Edit Subscriber</a>
-<a href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/delete'>Delete Subscriber</a>
-<a href='/accounts/{{account.id}}/subscribers'>Back to Subscribers</a>
+<div class="buttons-container">
+    <a class="button" href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/edit'>Edit Subscriber</a>
+    <a class="button type3" href='/accounts/{{account.id}}/subscribers/{{subscriber.id}}/delete'>Delete Subscriber</a>
+    <a class="button type2" href='/accounts/{{account.id}}/subscribers'>Back to Subscribers</a>
+</div>
 {% endblock %}

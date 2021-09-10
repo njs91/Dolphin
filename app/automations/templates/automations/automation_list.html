@@ -1,11 +1,11 @@
 {% extends 'core/main.html' %}
 {% block content %}
-<h1>Automations Page</h1>
-<h2>Automations for {{account}}</h2>
+<h1>Automations</h1>
 <p>Here is a list of your automations. An automation consists of messages for your subscribers.</p>
-<form method="get">
-  {{filter.form}}
-  <button type="submit">Search</button>
+<button class="button search">Show Search</button>
+<form method="get" class="filter-form with-ps hide">
+  {{filter.form.as_p}}
+  <button class="button" type="submit">Search</button>
 </form>
 <table style="width:100%">
     <tr>
@@ -18,11 +18,28 @@
         <td>{{automation.name}}</td>
         <td>{{automation.date_created}}</td>
         <td>
-            <a href="/accounts/{{account.id}}/automations/{{automation.id}}">View</a>
+            <a class="button" href="/accounts/{{account.id}}/automations/{{automation.id}}">View</a>
         </td>
     </tr>
     {% endfor %}
   </table>
-  <a href='/accounts/{{account.id}}'>View Account</a>
-  <a href='/accounts/{{account.id}}/automations/create'>Create Automation</a>
+  <div class="buttons-container">
+    <a class='button' href='/accounts/{{account.id}}/automations/create'>Create Automation</a>
+    <a class='button type2' href='/accounts/{{account.id}}'>View Account</a>
+  </div>
+
+  <script>
+    const searchBtn = document.querySelector('.search');
+    const form = document.querySelector('.filter-form');
+    searchBtn.onclick = () => {
+      form.classList.toggle('hide');
+
+      if (form.classList.contains('hide')) {
+        searchBtn.innerText = 'Show Search';
+        return;
+      }
+
+      searchBtn.innerText = 'Hide Search';
+    }
+  </script>
 {% endblock %}

@@ -8,8 +8,10 @@
 	{{form.as_p}}
 	<input type="submit" name="submit">
 </form>
-<a href='/accounts/{{account.id}}/messages/{{message.id}}/delete'>Delete Message</a>
-<a href='/accounts/{{account.id}}/messages/{{message.id}}'>Back to Message</a>
+<div class="buttons-container">
+	<a class="button type3" href='/accounts/{{account.id}}/messages/{{message.id}}/delete'>Delete Message</a>
+	<a class="button type2" href='/accounts/{{account.id}}/messages/{{message.id}}'>Back to Message</a>
+</div>
 
 {% for message in messages %}
 {{message}}

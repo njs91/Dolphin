@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h1>Edit page for {{automation}}</h1>
-<form action="{% url 'automation_edit' account.id automation.id %}" method="POST">
+<h1>Edit {{automation}}</h1>
+<form action="{% url 'automation_edit' account.id automation.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
 	{{form.as_p}}
 	<input type="submit" name="submit">
@@ -11,14 +11,14 @@
 
 {% if messages %}
 <h2>Add a message to this automation:</h2>
-<form action="{% url 'automation_add_message' account.id automation.id %}" method="POST">
+<form action="{% url 'automation_add_message' account.id automation.id %}" method="POST" class="stacked">
 	{% csrf_token %}
 	<select name="message_id" required>
 		{% for message in messages %}
 		<option value="{{message.id}}">{{message.name}}</option>
 		{% endfor %}
 	</select>
-	<input type="submit" name="submit">
+	<input type="submit" name="submit" value="Add">
 </form>
 {% else %}
 <p>All of your messages are in this automation.</p>
@@ -26,18 +26,20 @@
 
 {% if automation_messages %}
 <h2>Remove a message from this automation:</h2>
-<form action="{% url 'automation_remove_message' account.id automation.id %}" method="POST">
+<form action="{% url 'automation_remove_message' account.id automation.id %}" method="POST" class="stacked">
 	{% csrf_token %}
 	<select name="message_id" required>
 		{% for message in automation_messages %}
 		<option value="{{message.id}}">{{message.name}}</option>
 		{% endfor %}
 	</select>
-	<input type="submit" name="submit">
+	<input type="submit" name="submit" value="Remove">
 </form>
 {% endif %}
 
-<a href='/accounts/{{account.id}}/automations/{{automation.id}}/delete'>Delete Automation</a>
-<a href='/accounts/{{account.id}}/automations/{{automation.id}}'>Back to Automation</a>
+<div class="buttons-container">
+	<a class="button type3" href='/accounts/{{account.id}}/automations/{{automation.id}}/delete'>Delete Automation</a>
+	<a class="button type2" href='/accounts/{{account.id}}/automations/{{automation.id}}'>Back to Automation</a>
+</div>
 
 {% endblock %}

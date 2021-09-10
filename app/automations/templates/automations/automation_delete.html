@@ -6,9 +6,8 @@
 
 <form action="{% url 'automation_delete' account.id automation.id %}" method="POST">
     {% csrf_token %}
-    <input type="submit" name="confirm">
+    <a class="button" href="/accounts/{{account.id}}/automations">Cancel</a>
+    <input class="button type3" type="submit" name="confirm">
 </form>
-
-<a href='/accounts/{{account.id}}/automations'>Back to Automations</a>
 
 {% endblock %}

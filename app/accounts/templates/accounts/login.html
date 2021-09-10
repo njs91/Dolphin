@@ -2,19 +2,27 @@
 
 {% block content %}
 
-<p>Login Form:</p>
+<h1>Login Form</h1>
 <form action="{% url 'login' %}" method="POST">
 	{% csrf_token %}
-    <input type="text" name="username" placeholder="Username...">
-	<input type="password" name="password" placeholder="Password...">
+	<div class="field">
+		<label for="username">Username:</label>
+		<input type="text" name="username" placeholder="Username...">
+	</div>
+	<div class="field">
+		<label for="password">Password:</label>
+		<input type="password" name="password" placeholder="Password...">
+	</div>
 	<input type="submit" name="submit">
 </form>
 
 {% for message in messages %}
-{{message}}
+<p class='message'>{{message}}</p>
 {% endfor %}
 
-<a href='/accounts/create'>Create Account</a>
-<a href='{% url "reset_password" %}'>Forgot your password?</a>
+<div class="buttons-container">
+	<a class="button" href='/accounts/create'>Create Account</a>
+	<a class="button type2" href='{% url "reset_password" %}'>Forgot your password?</a>
+</div>
 
 {% endblock %}

@@ -6,8 +6,8 @@
 
 <form action="{% url 'delete_subscriber' account.id subscriber.id %}" method="POST">
     {% csrf_token %}
-    <a href="{% url 'get_subscriber' account.id subscriber.id %}">Cancel</a>
-    <input type="submit" name="confirm">
+    <a class="button" href="{% url 'get_subscriber' account.id subscriber.id %}">Cancel</a>
+    <input class="button type3" type="submit" name="confirm">
 </form>
 
 {% endblock %}
