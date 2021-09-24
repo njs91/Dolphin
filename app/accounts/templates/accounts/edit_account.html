@@ -3,9 +3,35 @@
 {% block content %}
 
 <h1>Edit Account</h1>
-<form action="{% url 'edit_account' account.id %}" method="POST" class="with-ps">
+<form action="{% url 'edit_account' account.id %}" method="POST">
 	{% csrf_token %}
-	{{form.as_p}}
+	<div class="field">
+		<label for="email">Email Address:</label>
+		<input type="text" name="email" placeholder="Email..." value={{form.email.value}}>
+	</div>
+	<div class="field">
+		<label for="password">Password:</label>
+		<input type="password" name="password" placeholder="Password..." required>
+	</div>
+	<div class="field">
+		<label for="text">First Name:</label>
+		<input type="text" name="first_name" maxlength="150" placeholder="e.g. Joe" value={{form.first_name.value}}>
+	</div>
+	<div class="field">
+		<label for="text">Last Name:</label>
+		<input type="text" name="last_name" maxlength="150" placeholder="e.g. Bloggs" value={{form.last_name.value}}>
+	</div>
+	<div class="field">
+		<label for="text">Username:</label>
+		<input type="text" name="username" maxlength="150" value={{form.username.value}}>
+	</div>
+	<p>
+		<label for="id_plan">Plan:</label>
+		<select name="plan" id="id_plan">
+			<option value="free" {% if form.plan.value == 'free' %}selected{% endif %}>free</option>
+			<option value="pro" {% if form.plan.value == 'pro' %}selected{% endif %}>pro</option>
+	  	</select>
+	</p>
 	<input type="submit" name="submit">
 </form>
 <div class="buttons-container">
