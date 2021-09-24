@@ -1,6 +1,7 @@
 {% extends 'core/main.html' %}
 {% block content %}
 <h1>Automations</h1>
+{% if automations %}
 <p>Here is a list of your automations. An automation consists of messages for your subscribers.</p>
 <button class="button search">Show Search</button>
 <form method="get" class="filter-form with-ps hide">
@@ -25,6 +26,9 @@
       {% endfor %}
     </table>
   </div>
+  {% else %}
+  <p>You don't have any automations.</p>
+  {% endif %}
   <div class="buttons-container">
     <a class='button' href='/accounts/{{account.id}}/automations/create'>Create Automation</a>
     <a class='button type2' href='/accounts/{{account.id}}'>View Account</a>

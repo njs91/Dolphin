@@ -1,6 +1,7 @@
 {% extends 'core/main.html' %}
 {% block content %}
-<h1>Subscribers for {{account}}</h1>
+<h1>Subscribers</h1>
+{% if subscribers %}
 <p>Here is your email list that you can send messages to via automations.</p>
 <button class="button search">Show Search</button>
 <form method="get" class="filter-form with-ps hide">
@@ -36,6 +37,10 @@
       {% endfor %}
     </table>
   </div>
+{% else %}
+<p>You don't have any subscribers.</p>
+{% endif %}
+
   <div class="buttons-container">
     <a class='button' href='/accounts/{{account.id}}/subscribers/create'>Create Subscriber</a>
     <a class='button type2' href='/accounts/{{account.id}}'>View Account</a>
