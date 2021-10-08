@@ -6,7 +6,6 @@ from .forms import MessageForm
 from .filters import MessageFilter
 from django.contrib.auth.decorators import login_required
 from core.decorators import allowed_users
-from automations.filters import AutomationFilter
 
 
 @login_required(login_url='login')
