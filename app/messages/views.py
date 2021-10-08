@@ -49,11 +49,10 @@ def message_create(request, pk):
 @allowed_users(allowed_roles=['admin', 'customer'], own_account_only=True)
 def message_view(request, pk, message_id):
     account = Account.objects.get(id=pk)  # pk needed? it'll be in the URL
-    automations = account.automation_set.all()
-    filter = AutomationFilter(request.GET, queryset=automations)
-    automations = filter.qs
     message = Message.objects.get(id=message_id)
-    context = {'account': account, 'message': message}
+    automations = message.automation_set.all()
+    context = {'account': account, 'message': message,
+               'automations': automations}
     return render(request, 'messages/message_view.html', context)
 
 

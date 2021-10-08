@@ -1,6 +1,6 @@
 {% extends 'core/main.html' %}
 {% block content %}
-<h1>Subscriber {{subscriber}}</h1>
+<h1>Subscriber {{subscriber.first_name}}</h1>
 <p>Forename: {{subscriber.first_name}}</p>
 <p>Email: {{subscriber.email}}</p>
 <p>Tags: {% for tag in subscriber.tags.get_queryset %}

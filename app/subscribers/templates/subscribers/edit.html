@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Edit Subscriber Page for {{subscriber}}</h1>
+<h1>Edit Subscriber Page for {{subscriber.first_name}}</h1>
 <form action="{% url 'edit_subscriber' account.id subscriber.id %}" method="POST" class="with-ps">
 	{% csrf_token %}
 	{{form.as_p}}
